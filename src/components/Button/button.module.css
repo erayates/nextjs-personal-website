@@ -1,0 +1,22 @@
+.container {
+    padding: 15px;
+    cursor: pointer;
+    background-color: #53c28b;
+    border: none;
+    border-radius: 5px;
+    width: max-content;
+}
+
+.button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.container:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
