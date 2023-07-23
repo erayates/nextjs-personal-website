@@ -1,7 +1,9 @@
 import React from "react";
+import styles from "./page.module.css";
+import Image from "next/image";
 
 async function getData(id) {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
     cache: "no-store",
   });
 
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,
     description: post.desc,
-  }
+  };
 }
 
 export default async function BlogPost({ params }) {
@@ -28,8 +30,10 @@ export default async function BlogPost({ params }) {
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.info}>
-          <h1 className={styles.title}>{post.title}</h1>
-          <p className={styles.desc}>{post.desc}</p>
+          <div className={styles.text}>
+            <h1 className={styles.title}>{post.title}</h1>
+            <p className={styles.desc}>{post.desc}</p>
+          </div>
           <div className={styles.author}>
             <Image
               src={post.img}
@@ -38,7 +42,7 @@ export default async function BlogPost({ params }) {
               height={40}
               className={styles.avatar}
             />
-            <span className={styles.author}>{post.author}</span>
+            <span >{post.author}</span>
           </div>
         </div>
         <div className={styles.imageContainer}>

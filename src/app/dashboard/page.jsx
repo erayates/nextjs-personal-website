@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -42,6 +43,9 @@ export default function Dashboard() {
       await fetch(`/api/posts/${id}`, {
         method: "DELETE",
       });
+
+      router.reload(window.location.pathname);
+
     } catch (err) {
       console.log(err);
     }
@@ -50,12 +54,9 @@ export default function Dashboard() {
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
-      const res = await fetch(
-        `/api/posts?username=${session?.data?.user.name}`,
-        {
-          cache: "no-store",
-        }
-      );
+      const res = await fetch(`/api/posts?author=${session?.data?.user.name}`, {
+        cache: "no-store",
+      });
 
       if (!res.ok) {
         setErr(true);
@@ -72,6 +73,8 @@ export default function Dashboard() {
   const session = useSession();
   const router = useRouter();
 
+  console.log(session?.data?.user.name);
+
   if (session.status === "loading") if (isLoading) return <div>Loading...</div>;
 
   if (session.status === "unauthenticated") router.push("/dashboard/login");
@@ -81,20 +84,22 @@ export default function Dashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.posts}>
-        {data?.map((post) => (
-          <div className={styles.post} key={post._id}>
-            <div className={styles.imgContainer}>
-              <Image src={post.img} alt="" width={200} height={100} />
+        {!isLoading &&
+          data?.map((post) => (
+            <div className={styles.post} key={post._id}>
+              <div className={styles.imgContainer}>
+                <Image src={post.img} alt="" fill={true} />
+              </div>
+              <h2 className={styles.postTitle}>{post.title}</h2>
+              <p className={styles.postDesc}>{post.desc}</p>
+              <span
+                className={styles.delete}
+                onClick={() => handleDelete(post._id)}
+              >
+                X
+              </span>
             </div>
-            <h2 className={styles.postTitle}></h2>
-            <span
-              className={styles.delete}
-              onClick={() => handleDelete(post._id)}
-            >
-              X
-            </span>
-          </div>
-        ))}
+          ))}
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1>Add New Posts</h1>

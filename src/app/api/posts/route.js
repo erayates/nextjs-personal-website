@@ -6,11 +6,11 @@ export const GET = async (request) => {
   // Fetch
   const url = new URL(request.url);
 
-  const username = url.searchParams.get("username");
+  const author = url.searchParams.get("author");
 
   try {
     await connectDB();
-    const posts = await Post.find(username && { username });
+    const posts = await Post.find(author && { author: author });
 
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (err) {
