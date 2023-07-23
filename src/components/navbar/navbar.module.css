@@ -25,3 +25,79 @@
     cursor: pointer;
     border-radius: 3px;
 }
+
+.burgerIcon{
+    cursor: pointer;
+}
+
+.burgerIcon:hover{
+    transform: rotate3d(0, 0, 1, 90deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.burgerIcon:not(:hover){
+    transform: rotate3d(0, 0, 1, 0deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.line{
+    height: 6px;
+}
+
+.line::before{
+    content: '-';
+    font-size: 64px;
+    font-weight: 200;
+    line-height: 0;
+    color: #fff;
+}
+
+/* Mobile */
+.mobileNavbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #53c28b;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 30;
+}
+
+.mobileLink{
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.closeIcon{
+    position: absolute;
+    font-size: 30px;
+    right: 30px;
+    top: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mobile{
+    display: none;
+  
+}
+
+
+@media screen and (max-width: 1024px){
+    .links{
+        display: none;
+    }
+
+    .mobile{
+        display: flex;
+        align-items: center;
+        gap: 20px
+    }
+}

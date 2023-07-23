@@ -1,6 +1,11 @@
 import Button from "@/components/Button/Button";
 import React from "react";
 import { notFound } from "next/navigation";
+import { items } from "./data";
+
+import styles from './page.module.css'
+import Image from "next/image";
+
 
 const getData = (cat) => {
   const data = items[cat];
@@ -36,8 +41,8 @@ export default function Category({ params }) {
             <Image
               className={styles.imgContainer}
               fill={true}
-              alt={item.image}
-              src=""
+              src={category.image}
+              alt="Category Image"
             />
           </div>
         </div>

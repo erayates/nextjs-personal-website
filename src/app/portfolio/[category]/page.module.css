@@ -35,3 +35,21 @@
 .title{
     font-size: 50px;
 }
+
+
+@media screen and (max-width: 768px){
+    .item,
+    .item:nth-child(2n+1){
+        flex-direction: column;
+    }
+
+    .imgContainer{
+        flex: auto;
+        height: 300px;
+    }
+
+
+    .title{
+        font-size: 30px;
+    }
+}

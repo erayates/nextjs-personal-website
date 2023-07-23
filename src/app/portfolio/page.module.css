@@ -46,3 +46,11 @@
     font-weight: bold;
 }
 
+@media screen and (max-width: 768px){
+    .mainTitle{
+        font-size: 72px;
+        line-height: 4.5rem;
+    }
+
+   
+}
