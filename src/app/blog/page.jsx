@@ -1,12 +1,11 @@
 import React from "react";
 import styles from "./page.module.css";
-import Link from "next/link";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 
 async function getData() {
   const res = await fetch("http://localhost:3000/api/posts", {
-    next: { revalidate: 10 },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
