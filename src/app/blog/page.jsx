@@ -1,12 +1,16 @@
-"use client";
 
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
+import { headers } from "next/dist/client/components/headers";
 
 async function getData() {
-  const res = await fetch("/api/posts", {
+  const host = headers().get("host");
+  const protocol = process?.env.NODE_ENV === "development" ? "http" : "https";
+  const url = `${protocol}://${host}/api/posts`;
+
+  const res = await fetch(url, {
     cache: "no-store",
   });
   if (!res.ok) {

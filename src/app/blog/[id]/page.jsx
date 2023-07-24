@@ -5,7 +5,11 @@ import styles from "./page.module.css";
 import Image from "next/image";
 
 async function getData(id) {
-  const res = await fetch(`/api/posts/${id}`, {
+  const host = headers().get("host");
+  const protocol = process?.env.NODE_ENV === "development" ? "http" : "https";
+  const url = `${protocol}://${host}/api/posts/${id}`;
+
+  const res = await fetch(url, {
     cache: "no-store",
   });
 
